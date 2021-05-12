@@ -2,9 +2,35 @@
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
+const Hearts = document.querySelector(".like-glyph");
+
 // Your JavaScript code goes here!
+Hearts.addEventListener('click', (e) => {
+  // mimicServerCall()
+  mimicServerCall("bogusUrl", {forceFailure: true})
+  // console.log('success')
+  .then(function(message){
+    changeHeartStatus(e.target)
+  })
+  .catch(function(error){
+    console.log("error was caught")
+    const modal = document.getElementById("modal")
+    modal.className = ""
+    modal.innerText = error
+    setTimeout(() =>  modal.className = "hidden", 3000);
+  })
+  // changeHeartStatus(e.target)
+})
 
-
+function changeHeartStatus(target){
+  console.log(target.innerText)
+  if(target.innerText === '♡'){
+    target.innerText = '♥'
+  }
+  else if(target.innerText === '♥'){
+    target.innerText = '♡'
+  }
+}
 
 
 //------------------------------------------------------------------------------
